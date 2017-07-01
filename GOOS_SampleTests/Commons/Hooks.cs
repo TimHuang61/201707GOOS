@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using FluentAutomation;
+using GOOS_SampleTests.DataModels;
 using TechTalk.SpecFlow;
 
 namespace GOOS_SampleTests.Commons
@@ -19,6 +20,35 @@ namespace GOOS_SampleTests.Commons
         {
             SeleniumWebDriver.Bootstrap(SeleniumWebDriver.Browser.Chrome);
         }
+
+
+        [BeforeScenario]
+        public void BeforeScenarioCleanTable()
+        {
+            CleanTableByTags();
+        }
+
+        [AfterFeature]
+        public static void AfterFeatureCleanTable()
+        {
+            CleanTableByTags();
+        }
+
+        private static void CleanTableByTags()
+        {
+            var tags = ScenarioContext.Current.ScenarioInfo.Tags.Where(x => x.StartsWith("Clean")).Select(x => x.Replace("Clean", "")).ToList();
+            if (!tags.Any())
+            {
+                return;
+            }
+
+            using (var dbcontext = new NorthwindEntities())
+            {
+                tags.ForEach(tag => dbcontext.Database.ExecuteSqlCommand($"TRUNCATE TABLE {tag}"));
+                dbcontext.SaveChangesAsync();
+            }
+        }
+
 
         //[AfterScenario]
         //public void AfterScenario()

@@ -11,18 +11,10 @@ using TechTalk.SpecFlow.Assist;
 namespace GOOS_SampleTests.steps
 {
     [Binding]
+    [Scope(Feature = "BudgetController")]
     public class BudgetControllerSteps
     {
         private BudgetController _budgetController = new BudgetController();
-                                
-        [BeforeScenario]
-        public void BeforeScenario()
-        {
-            using (var dbcontext = new NorthwindEntities())
-            {
-                dbcontext.Database.ExecuteSqlCommand("TRUNCATE TABLE Budgets");
-            }
-        }
 
         [When(@"add a budget")]
         public void WhenAddABudget(Table table)
