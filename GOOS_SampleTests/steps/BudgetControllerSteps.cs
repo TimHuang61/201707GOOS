@@ -5,7 +5,9 @@ using FluentAssertions;
 using GOOS_Sample.Controllers;
 using GOOS_Sample.Models;
 using GOOS_Sample.Models.ViewModels;
+using GOOS_SampleTests.Commons;
 using GOOS_SampleTests.DataModels;
+using Microsoft.Practices.Unity;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -16,7 +18,8 @@ namespace GOOS_SampleTests.steps
     [Scope(Feature = "BudgetController")]
     public class BudgetControllerSteps
     {
-        private BudgetController _budgetController = new BudgetController(new BudgetService());
+        private BudgetController _budgetController = Hooks.UnityContainer.Resolve<BudgetController>();
+        // private BudgetController _budgetController = new BudgetController(new BudgetService());
 
         [When(@"add a budget")]
         public void WhenAddABudget(Table table)

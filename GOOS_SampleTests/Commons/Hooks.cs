@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using FluentAutomation;
+using GOOS_Sample.Models;
 using GOOS_SampleTests.DataModels;
+using Microsoft.Practices.Unity;
 using TechTalk.SpecFlow;
 
 namespace GOOS_SampleTests.Commons
@@ -33,6 +35,16 @@ namespace GOOS_SampleTests.Commons
         {
             CleanTableByTags();
         }
+
+
+        [BeforeTestRun()]
+        public static void RegisterDIContainer()
+        {
+            UnityContainer = new UnityContainer();
+            UnityContainer.RegisterType<IBudgetService, BudgetService>();
+        }
+
+        public static IUnityContainer UnityContainer { get; set; }
 
         private static void CleanTableByTags()
         {
