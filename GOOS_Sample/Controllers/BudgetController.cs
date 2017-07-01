@@ -1,10 +1,5 @@
 ﻿using GOOS_Sample.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using GOOS_Sample.Models.DataModels;
 using GOOS_Sample.Models.ViewModels;
 
 namespace GOOS_Sample.Controllers
@@ -36,5 +31,7 @@ namespace GOOS_Sample.Controllers
 
             return View(model);
         }
+
+
     }
 }
