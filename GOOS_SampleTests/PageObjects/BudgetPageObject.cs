@@ -6,28 +6,33 @@ namespace GOOS_SampleTests.PageObjects
 {
     internal class BudgetCreatePage : PageObject<BudgetCreatePage>
     {
+        // 在這邊已經開始制定頁面的雛型
         public BudgetCreatePage(FluentTest test) : base(test)
         {
+            // page context 資訊另外抽出來
+            this.Url = $"{PageContext.Domain}/budget/add";
         }
 
         public BudgetCreatePage Amount(object amount)
         {
-            throw new System.NotImplementedException();
+            I.Enter(amount.ToString()).In("#amount");
+            return this;
         }
 
         public BudgetCreatePage Month(object yearMonth)
         {
-            throw new System.NotImplementedException();
+            I.Enter(yearMonth).In("#month");
+            return this;
         }
 
-        internal BudgetCreatePage AddBudget()
+        public void AddBudget()
         {
-            throw new NotImplementedException();
+            I.Click("input[type=\"submit\"]");
         }
 
-        public BudgetCreatePage ShouldDisplay(string message)
+        public void ShouldDisplay(string message)
         {
-            throw new NotImplementedException();
+            I.Assert.Text(message).In("#message");
         }
     }
 }
