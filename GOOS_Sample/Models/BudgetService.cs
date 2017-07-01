@@ -22,5 +22,10 @@ namespace GOOS_Sample.Models
             var budget = new Budget { Amount = model.Amount, YearMonth = model.Month };
             this._budgetRespository.Save(budget);
         }
+
+        public void Read(Func<Budget, bool> any)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

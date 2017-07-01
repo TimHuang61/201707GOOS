@@ -22,6 +22,10 @@ namespace GOOS_Sample.Controllers
         {
             return View();
         }
+
+        // 增加service and controller 的彈性
+        // controller透過event來決定顯示的訊息是甚麼
+        // 而service則自行判斷來決定觸發甚麼事件
         [HttpPost]
         public ActionResult Add(BudgetAddViewModel model)
         {
