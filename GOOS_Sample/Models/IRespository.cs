@@ -1,4 +1,4 @@
-﻿namespace GOOS_Sample
+﻿namespace GOOS_Sample.Models
 {
     public interface IRespository<T>
     {
