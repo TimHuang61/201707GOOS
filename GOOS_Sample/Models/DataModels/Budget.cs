@@ -1,4 +1,4 @@
-namespace GOOS_Sample.Models
+namespace GOOS_Sample.Models.DataModels
 {
     using System;
     using System.Collections.Generic;

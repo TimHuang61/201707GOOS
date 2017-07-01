@@ -13,18 +13,20 @@ namespace GOOS_SampleTests.steps
     [Binding]
     public class BudgetControllerSteps
     {
-        private BudgetController _budgetController;
-
-        [BeforeScenario()]
+        private BudgetController _budgetController = new BudgetController();
+                                
+        [BeforeScenario]
         public void BeforeScenario()
         {
-            this._budgetController = new BudgetController();
+            using (var dbcontext = new NorthwindEntities())
+            {
+                dbcontext.Database.ExecuteSqlCommand("TRUNCATE TABLE Budgets");
+            }
         }
 
         [When(@"add a budget")]
         public void WhenAddABudget(Table table)
         {
-
             var model = table.CreateInstance<BudgetAddViewModel>();
             var result = this._budgetController.Add(model);
             ScenarioContext.Current.Set(result);
@@ -41,11 +43,10 @@ namespace GOOS_SampleTests.steps
         [Then(@"it should exist a budget record in budget table")]
         public void ThenItShouldExistABudgetRecordInBudgetTable(Table table)
         {
-
+            // 連測試DB.
             using (var dbcontext = new NorthwindEntities())
             {
-                var budget = dbcontext.Budgets
-                    .FirstOrDefault();
+                var budget = dbcontext.Budgets.FirstOrDefault();
                 budget.Should().NotBeNull();
                 table.CompareToInstance(budget);
             }
