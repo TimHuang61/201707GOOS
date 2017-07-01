@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="PageObjects\BudgetPageObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="steps\InserTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

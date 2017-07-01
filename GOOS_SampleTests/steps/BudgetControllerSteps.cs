@@ -19,6 +19,8 @@ namespace GOOS_SampleTests.steps
     public class BudgetControllerSteps
     {
         private BudgetController _budgetController = Hooks.UnityContainer.Resolve<BudgetController>();
+
+        private readonly InserTable _inserTable = new InserTable();
         // private BudgetController _budgetController = new BudgetController(new BudgetService());
 
         [When(@"add a budget")]
@@ -52,18 +54,6 @@ namespace GOOS_SampleTests.steps
         private static string GetAddingSuccessfullyMessage()
         {
             return "added successfully";
-        }
-
-        [Given(@"Budget table existed budgets")]
-        public void GivenBudgetTableExistedBudgets(Table table)
-        {
-            //same with BudgetCreateSteps
-            var budgets = table.CreateSet<Budget>();
-            using (var dbcontext = new NorthwindEntities())
-            {
-                dbcontext.Budgets.AddRange(budgets);
-                dbcontext.SaveChanges();
-            }
         }
 
         [Then(@"ViewBag should have a message for updating successfully")]
