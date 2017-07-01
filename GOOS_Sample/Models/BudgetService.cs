@@ -5,21 +5,24 @@ namespace GOOS_Sample.Models
 {
     public class BudgetService : IBudgetService
     {
-        private IRespository<Budget> _budgetRespositoryStub;
+        private IRespository<Budget> _budgetRespository;
 
-        public BudgetService(IRespository<Budget> budgetRespositoryStub)
+        public BudgetService(IRespository<Budget> budgetRespository)
         {
-            _budgetRespositoryStub = budgetRespositoryStub;
+            _budgetRespository = budgetRespository;
         }
 
         public void Create(BudgetAddViewModel model)
         {
-            using (var dbContext = new BudgetEntites())
-            {
-                var budget = new Budget { Amount = model.Amount, YearMonth = model.Month };
-                dbContext.Budgets.Add(budget);
-                dbContext.SaveChanges();
-            }
+            //using (var dbContext = new BudgetEntites())
+            //{
+            //    var budget = new Budget { Amount = model.Amount, YearMonth = model.Month };
+            //    dbContext.Budgets.Add(budget);
+            //    dbContext.SaveChanges();
+            //}
+
+            var budget = new Budget { Amount = model.Amount, YearMonth = model.Month };
+            this._budgetRespository.Save(budget);
         }
     }
 }
