@@ -1,7 +1,9 @@
 ﻿using System;
 using FluentAutomation;
+using GOOS_SampleTests.DataModels;
 using GOOS_SampleTests.PageObjects;
 using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace GOOS_SampleTests.steps
 {
@@ -40,7 +42,13 @@ namespace GOOS_SampleTests.steps
         [Given(@"Budget table existed budgets")]
         public void GivenBudgetTableExistedBudgets(Table table)
         {
-            ScenarioContext.Current.Pending();
+
+            var budgets = table.CreateSet<Budget>();
+            using (var dbcontext = new NorthwindEntities())
+            {
+                dbcontext.Budgets.AddRange(budgets);
+                dbcontext.SaveChanges();
+            }
         }
     }
 }
