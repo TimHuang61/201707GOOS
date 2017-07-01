@@ -29,10 +29,18 @@ namespace GOOS_SampleTests.steps
             this._budgetCreatePage.Amount(amount).Month(yearMonth).AddBudget();
         }
 
+        //----------update budget -----------------------------
+
         [Then(@"it should display ""(.*)""")]
         public void ThenItShouldDisplay(string message)
         {
             this._budgetCreatePage.ShouldDisplay(message);
+        }
+
+        [Given(@"Budget table existed budgets")]
+        public void GivenBudgetTableExistedBudgets(Table table)
+        {
+            ScenarioContext.Current.Pending();
         }
     }
 }
