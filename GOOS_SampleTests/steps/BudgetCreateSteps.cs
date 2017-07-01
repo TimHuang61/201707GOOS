@@ -5,6 +5,7 @@ using TechTalk.SpecFlow;
 
 namespace GOOS_SampleTests.steps
 {
+    // 驗收測試
     [Binding]
     [Scope(Feature = "BudgetCreate")]
     public class BudgetCreateSteps : FluentTest<BudgetCreateSteps>
@@ -25,10 +26,7 @@ namespace GOOS_SampleTests.steps
         [When(@"I add a buget (.*) for ""(.*)""")]
         public void WhenIAddABugetFor(int amount, string yearMonth)
         {
-            this._budgetCreatePage
-                .Amount(amount)
-                .Month(yearMonth)
-                .AddBudget();
+            this._budgetCreatePage.Amount(amount).Month(yearMonth).AddBudget();
         }
 
         [Then(@"it should display ""(.*)""")]

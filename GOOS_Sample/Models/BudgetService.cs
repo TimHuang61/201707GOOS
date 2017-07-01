@@ -9,11 +9,7 @@ namespace GOOS_Sample.Models
         {
             using (var dbContext = new BudgetEntites())
             {
-                var budget = new Budget
-                {
-                    Amount = model.Amount,
-                    YearMonth = model.Month
-                };
+                var budget = new Budget { Amount = model.Amount, YearMonth = model.Month };
                 dbContext.Budgets.Add(budget);
                 dbContext.SaveChanges();
             }

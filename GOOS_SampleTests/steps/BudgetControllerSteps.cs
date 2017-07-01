@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using FluentAssertions;
 using GOOS_Sample.Controllers;
+using GOOS_Sample.Models;
 using GOOS_Sample.Models.ViewModels;
 using GOOS_SampleTests.DataModels;
 using TechTalk.SpecFlow;
@@ -10,11 +11,12 @@ using TechTalk.SpecFlow.Assist;
 
 namespace GOOS_SampleTests.steps
 {
+    // 整合測試
     [Binding]
     [Scope(Feature = "BudgetController")]
     public class BudgetControllerSteps
     {
-        private BudgetController _budgetController = new BudgetController();
+        private BudgetController _budgetController = new BudgetController(new BudgetService());
 
         [When(@"add a budget")]
         public void WhenAddABudget(Table table)
